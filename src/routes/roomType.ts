@@ -1,6 +1,12 @@
 import { Router } from 'express';
 
-import { createRoomType, deleteRoomType, getRoomTypeById, listRoomType, updateRoomType } from '../controllers/roomTypeController';
+import {
+  createRoomType,
+  deleteRoomType,
+  getRoomTypeById,
+  listRoomType,
+  updateRoomType,
+} from '../controllers/roomTypeController';
 
 const router = Router();
 

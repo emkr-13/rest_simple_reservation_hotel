@@ -7,7 +7,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": ".",
     "moduleResolution": "Node",
     "baseUrl": "./src",
     "paths": {
@@ -23,6 +23,6 @@
     "emitDecoratorMetadata": true,
     "typeRoots": ["./node_modules/@types"]
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "drizzle.config.ts"],
   "exclude": ["node_modules", "dist"]
 }

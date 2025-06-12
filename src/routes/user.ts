@@ -5,7 +5,7 @@ import { editUser, getProfile } from '../controllers/userController';
 const router = Router();
 
 // Rute untuk mendapatkan profil user
-router.get('/profile',  getProfile);
+router.get('/profile', getProfile);
 
 // Rute untuk mengedit user
 router.post('/edit', editUser);

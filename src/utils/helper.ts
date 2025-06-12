@@ -1,5 +1,4 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
 interface JwtResponse {
   success: boolean;
@@ -17,8 +16,6 @@ interface PaginationResponse {
   next: number;
   detail: number[];
 }
-
-
 
 /**
  * Menghasilkan JWT token untuk autentikasi.
@@ -75,10 +72,10 @@ async function generateRefreshToken(payload: object): Promise<JwtResponse> {
 async function pagination(
   total: number,
   pagenum: number,
-  limit: number
+  limit: number,
 ): Promise<PaginationResponse> {
   try {
-    let total_page = Math.ceil(total / limit);
+    const total_page = Math.ceil(total / limit);
     let prev = pagenum - 1;
     if (prev < 1) {
       prev = 0;
@@ -89,7 +86,7 @@ async function pagination(
     }
     let from = 1;
     let to = total_page;
-    let to_page = pagenum - 2;
+    const to_page = pagenum - 2;
     if (to_page > 0) {
       from = to_page;
     }
@@ -105,7 +102,7 @@ async function pagination(
     }
     let firstpage_istrue = false;
     let lastpage_istrue = false;
-    let detail: number[] = [];
+    const detail: number[] = [];
     if (total_page > 1) {
       for (let i = from; i <= to; i++) {
         detail.push(i);
@@ -143,4 +140,4 @@ async function pagination(
   }
 }
 
-export {  generateJwtToken, generateRefreshToken, pagination };
+export { generateJwtToken, generateRefreshToken, pagination };

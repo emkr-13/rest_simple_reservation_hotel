@@ -1,16 +1,12 @@
-import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
-import { sendResponse } from "../utils/responseHelper";
+import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+import { sendResponse } from '../utils/responseHelper';
 
-export const authenticate = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): void => {
-  const token = req.header("Authorization")?.replace("Bearer ", "");
+export const authenticate = (req: Request, res: Response, next: NextFunction): void => {
+  const token = req.header('Authorization')?.replace('Bearer ', '');
 
   if (!token) {
-    sendResponse(res, 401, "Access denied");
+    sendResponse(res, 401, 'Access denied');
     return;
   }
 
@@ -19,6 +15,6 @@ export const authenticate = (
     (req as any).user = decoded;
     next();
   } catch (error) {
-    sendResponse(res, 400, "Invalid token");
+    sendResponse(res, 400, 'Invalid token');
   }
 };

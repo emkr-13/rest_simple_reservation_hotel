@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 // Zod schemas
 export const userSchema = z.object({
@@ -9,18 +9,16 @@ export const userSchema = z.object({
 });
 
 export const registerRequestSchema = z.object({
-    email: z.string().email("Invalid email format"),
-    password: z.string().min(6, "Password must be at least 6 characters"),
-    name: z.string().optional(),
-  });
+  email: z.string().email('Invalid email format'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+  name: z.string().optional(),
+});
 
 export const loginRequestSchema = z.object({
-    email: z.string().email("Invalid email format"),
-    password: z.string().min(6, "Password must be at least 6 characters"),
-  });
+  email: z.string().email('Invalid email format'),
+  password: z.string().min(6, 'Password must be at least 6 characters'),
+});
 
 export const editUserRequestSchema = z.object({
-    name: z.string().optional(),
-  });
-  
-  
+  name: z.string().optional(),
+});
