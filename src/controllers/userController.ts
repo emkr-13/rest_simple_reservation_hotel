@@ -4,6 +4,7 @@ import { eq } from "drizzle-orm";
 import { sendResponse } from "../utils/responseHelper";
 import { Request, Response } from "express";
 import { editUserRequestSchema } from "../validator/user";
+
 export const getProfile = async (
   req: Request,
   res: Response

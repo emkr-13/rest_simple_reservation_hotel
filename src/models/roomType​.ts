@@ -10,7 +10,7 @@ export const roomTypes = pgTable("room_types", {
     id:  uuid("id")
     .primaryKey()
     .default(sql`gen_random_uuid()`),
-    name: varchar("name", { length: 255 }).notNull(),
+    name: varchar("name", { length: 255 }).notNull().unique(),
     createdAt: timestamp("created_at").defaultNow(),
     updatedAt: timestamp("updated_at").defaultNow(),
     deletedAt: timestamp("deleted_at"),
