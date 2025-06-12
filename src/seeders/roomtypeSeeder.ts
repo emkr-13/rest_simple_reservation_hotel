@@ -18,6 +18,15 @@ async function seed() {
     {
       name: 'VIP Room',
     },
+    {
+      name: 'Deluxe',
+    },
+    {
+      name: 'Standard',
+    },
+    {
+      name: 'Presidential Room',
+    },
   ];
 
   // Lakukan bulk insert
