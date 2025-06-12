@@ -23,7 +23,7 @@ export const getProfile = async (
       return;
     }
     let datauser={
-        username: user.username,
+        email: user.email,
         usercreated: user.createdAt,
     }
     // Kirim response dengan data user
@@ -41,18 +41,18 @@ export const editUser = async (req: Request, res: Response): Promise<void> => {
     if (!userId) {
       sendResponse(res, 400, "Unauthorized");
     } // Ambil user ID dari token yang sudah diverifikasi
-    const { username } = req.body; // Ambil data dari request body
+    const { name } = req.body; // Ambil data dari request body
 
     // Validasi input
-    if (!username) {
-      sendResponse(res, 400, "Username is required");
+    if (!name) {
+      sendResponse(res, 400, "Name is required");
       return;
     }
 
     // Update user di database
     const updatedUser = await db
       .update(users)
-      .set({ username })
+      .set({ name })
       .where(eq(users.id, userId));
 
     // Jika user tidak ditemukan

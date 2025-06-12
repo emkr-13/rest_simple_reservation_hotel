@@ -10,17 +10,17 @@ import { generateJwtToken, generateRefreshToken } from "../utils/helper";
 export const login = async (req: Request, res: Response): Promise<void> => {
   try {
     // Validasi input
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    if (!username || !password) {
-      sendResponse(res, 400, "Username and password are required");
+    if (!email || !password) {
+      sendResponse(res, 400, "Email and password are required");
     }
 
     // Cari user berdasarkan username
     const [user] = await db
       .select()
       .from(users)
-      .where(eq(users.username, username));
+      .where(eq(users.email, email));
 
     // Jika user tidak ditemukan
     if (!user) {

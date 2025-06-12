@@ -7,7 +7,8 @@ async function seed() {
   const hashedPassword = await bcrypt.hash("password123", salt);
 
   await db.insert(users).values({
-    username: "admin",
+    email: "admin@gmail.com",
+    name: "admin",
     password: hashedPassword,
   });
 }
