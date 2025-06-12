@@ -3,7 +3,7 @@ import { users } from "../models/user";
 import { eq } from "drizzle-orm";
 import { sendResponse } from "../utils/responseHelper";
 import { Request, Response } from "express";
-
+import { editUserRequestSchema } from "../validator/user";
 export const getProfile = async (
   req: Request,
   res: Response
@@ -24,6 +24,7 @@ export const getProfile = async (
     }
     let datauser={
         email: user.email,
+        name: user.name,
         usercreated: user.createdAt,
     }
     // Kirim response dengan data user
@@ -41,7 +42,7 @@ export const editUser = async (req: Request, res: Response): Promise<void> => {
     if (!userId) {
       sendResponse(res, 400, "Unauthorized");
     } // Ambil user ID dari token yang sudah diverifikasi
-    const { name } = req.body; // Ambil data dari request body
+    const { name } = editUserRequestSchema.parse(req.body); // Ambil data dari request body
 
     // Validasi input
     if (!name) {

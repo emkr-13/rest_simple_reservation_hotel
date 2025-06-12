@@ -2,15 +2,15 @@ import { db } from "../config/db";
 import { users } from "../models/user";
 import { eq } from "drizzle-orm";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
 import { sendResponse } from "../utils/responseHelper";
 import { generateJwtToken, generateRefreshToken } from "../utils/helper";
+import { registerRequestSchema, loginRequestSchema } from "../validator/user";
 
 export const login = async (req: Request, res: Response): Promise<void> => {
   try {
     // Validasi input
-    const { email, password } = req.body;
+    const { email, password } = loginRequestSchema.parse(req.body);
 
     if (!email || !password) {
       sendResponse(res, 400, "Email and password are required");
@@ -76,6 +76,39 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   } catch (error) {
     console.error("Unexpected error during login:", error);
     sendResponse(res, 500, "An unexpected error occurred", error);
+  }
+};
+
+export const register = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { email, password, name } = registerRequestSchema.parse(req.body);
+
+    if (!email || !password || !name) {
+      sendResponse(res, 400, "Email, password, and name are required");
+      return;
+    }
+
+    // Cek apakah email sudah terdaftar
+    const existingUser = await db.select().from(users).where(eq(users.email, email));
+    if (existingUser) {
+      sendResponse(res, 400, "Email already exists");
+      return;
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Simpan user baru ke database
+    await db.insert(users).values({
+      email,
+      password: hashedPassword,
+      name,
+    });
+
+    sendResponse(res, 201, "User registered successfully");
+  } catch (error) {
+    console.error("Error during registration:", error);
+    sendResponse(res, 500, "Registration failed", error);
   }
 };
 
