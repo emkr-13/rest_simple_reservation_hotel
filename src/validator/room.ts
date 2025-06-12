@@ -26,3 +26,10 @@ export const deleteRoomRequestSchema = roomSchema.extend({
 export const getRoomRequestSchema = roomSchema.extend({
   id: z.string().min(1, 'ID is required'),
 });
+
+export const listRoomRequestSchema = z.object({
+  page: z.number().min(1, 'Page is required'),
+  limit: z.number().min(1, 'Limit is required'),
+  search: z.string().optional(),
+});
+

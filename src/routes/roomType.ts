@@ -12,7 +12,7 @@ const router = Router();
 
 router.post('/create', createRoomType);
 router.get('/list', listRoomType);
-router.get('/getById', getRoomTypeById);
+router.get('/detail', getRoomTypeById);
 router.put('/update', updateRoomType);
 router.delete('/delete', deleteRoomType);
 
