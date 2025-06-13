@@ -6,6 +6,7 @@ Teknologi yang digunakan:
 - Node.js (TS)
 - Drizzle ORM
 - PostgreSQL (database)
+- Zod
 
 ## Installation
 
